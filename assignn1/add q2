@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxGoodSubsequenceLength(vector<int>& A) {
+    sort(A.begin(), A.end());
+
+    int n = A.size();
+    int l = 0, maxLen = 0;
+
+    for (int r = 0; r < n; r++) {
+        while (A[r] - A[l] > 10) {
+            l++;
+        }
+        maxLen = max(maxLen, r - l + 1);
+    }
+    return maxLen;
+}
+
+int main() {
+    vector<int> A = {1, 3, 6, 10, 15, 16, 17};
+    cout << "Maximum length of good subsequence = "
+         << maxGoodSubsequenceLength(A) << endl;
+    return 0;
+}
