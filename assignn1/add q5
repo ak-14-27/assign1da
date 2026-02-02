@@ -1,0 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        long long N, H, W;
+        cin >> N >> H >> W;
+        cout << max(N * W, H) << endl;
+    }
+}
