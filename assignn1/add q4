@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    for (int &x : a) cin >> x;
+
+    long long ans = 0;
+
+    for (int i = 0; i < n; i++) {
+        unordered_map<int, int> mp;
+        mp[0] = 1;
+        int sum = 0;
+        bool ok = false;
+
+        for (int j = 0; j < n; j++) {
+            sum += (a[j] > a[i]);
+            if (mp.count(sum - k)) {
+                ok = true;
+                break;
+            }
+            mp[sum]++;
+        }
+
+        if (ok) ans += a[i];
+    }
+
+    cout << ans << endl;
+}
