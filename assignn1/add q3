@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int median(vector<int> v) {
+    sort(v.begin(), v.end());
+    return v[v.size() / 2];
+}
+
+int main() {
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for (int i = 0; i < N; i++) cin >> A[i];
+
+    while (A.size() > 2) {
+        vector<int> medians;
+
+        for (int i = 0; i < A.size(); i++) {
+            for (int j = i; j < A.size(); j++) {
+                if ((j - i + 1) % 2 == 1) {
+                    vector<int> temp(A.begin() + i, A.begin() + j + 1);
+                    int m = median(temp);
+                    if (m > 2) medians.push_back(m);
+                }
+            }
+        }
+
+        int mn = *min_element(medians.begin(), medians.end());
+        auto it = find(A.begin(), A.end(), mn);
+        if (it != A.end()) A.erase(it);
+    }
+
+    cout << A[0] + A[1] << endl;
+}
